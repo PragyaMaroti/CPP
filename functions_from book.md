@@ -74,3 +74,91 @@ variables do not change the global variables.** A local variable with the same n
 global variable hides the global variable, however. **If a function has a variable with the
 same name as a global variable, the name refers to the local variable—not the global—
 when used within the function.**
+
+------------
+
+❕ Important points:  
+- Virtually no limit exists to the number or types of statements that can be placed in the
+body of a function. Although you can’t define another function from within a function,
+but you can call a function.   
+- Although no limit exists to the size of a function in C++, well-designed functions tend to
+be small. 
+- Any valid C++ expression can be a function argument, including constants, mathematical
+and logical expressions, and other functions that return a value. The important thing is
+that the result of the expression matches the argument type expected by the function.  
+- It is even valid for a function to be passed as an argument. But, using a function as an argument, however, can make for code
+that is hard to read and hard to debug.
+- Functions return a value or return void. void is a signal to the compiler that no value
+will be returned.
+To return a value from a function, write the keyword return followed by the value you
+want to return. The value might itself be an expression that returns a value. For example:  
+return 5; // returns a number  
+return (x > 5); // returns the result of a comparison  
+return (MyFunction()); // returns the value returned by calling another  
+These are all legal return statements, assuming that the function MyFunction() itself
+returns a value.  
+### Default parameters:  
+long myFunction (int x = 50);
+This prototype says, “myFunction() returns a long and takes an integer parameter. If an
+argument is not supplied, use the default value of 50.” Because parameter names are not
+required in function prototypes, this declaration could have been written as
+long myFunction (int = 50);
+The function definition is not changed by declaring a default parameter. The function
+definition header for this function would be
+long myFunction (int x)
+If the calling function did not include a parameter, the compiler would fill x with the
+default value of 50. The name of the default parameter in the prototype need not be the
+same as the name in the function header; the default value is assigned by position, not
+name.   
+
+❗Note: If any parameter does not have a default value, no previous parameter can
+have a default value.❗
+
+### Overloading Functions
+C++ enables you to create more than one function with the same name. This is called
+function overloading. The functions must differ in their parameter list with a different
+type of parameter, a different number of parameters, or both. Here’s an example:  
+int myFunction (int, int);  
+int myFunction (long, long);  
+int myFunction (long);  
+myFunction() is overloaded with three parameter lists.    
+❗Overloaded
+versions of functions cannot differ only in return type; that is, they should also
+accept a uniquely different set of arguments ❗  
+
+   int myFunction (int);
+   void myFunction (int); // illegal - as it differs only in return type  
+   
+   
+   **Function overloading is also called function polymorphism. Poly means many, and morph
+means form**
+By changing the number or type of the parameters, you can give two or
+more functions the same function name, and the right one will be called automatically by
+matching the parameters used.  
+### Inline Functions:  
+**If a function is declared with the keyword inline, the compiler does not create a real
+function; it copies the code from the inline function directly into the calling function. No
+jump is made; it is just as if you had written the statements of the function right into the
+calling function.**  
+Note that inline functions can bring a heavy cost. **If the function is called 10 times, the
+inline code is copied into the calling functions each of those 10 times. The tiny improvement
+in speed you might achieve might be more than swamped by the increase in size of
+the executable program, which might in fact actually slow the program!**   
+The reality is that today’s optimizing compilers can almost certainly do a better job of
+making this decision than you can, so it is generally a good idea not to declare a function
+as inline unless it is only one or, at most, two statements in length. When in doubt, leave
+inline out. Some compilers might deliberately not inline a function marked by the programmer
+as inline if the function is way too big and making it inline would result in a
+significant bloating of the executable being built.  
+
+### Recursion
+A function can call itself. This is called recursion, and recursion can be direct or indirect.
+It is direct recursion when a function calls itself; it is indirect recursion when a function
+calls another function that then calls the first function.  
+Recursive functions need a stop condition. Something must happen to cause the program
+to stop recursion or it will never end(a runtime failure).  
+❗It is important to note that when a function calls itself, a new copy of that function is run.
+The local variables in the second version are independent of the local variables in the
+first, and they cannot affect one another directly any more. ❗  
+Note: Recursion is faster if function call is the lasst thing in that function and it doesn't wait for a value from next call.
+
