@@ -86,4 +86,132 @@ Class declaration doesn't allocate memory, but it lets the compiler know about h
 ### Defining an Object
 After we declare a class, we can then use it as a new type to declare variables of that
 type. We declare an object of your new type the same as we declare an integer variable.  
-An object is an individual instance of a class.
+An object is an individual instance of a class.   
+
+### Accessing Class members:  
+After an object is defined, we can aceess class members (of that object) or call a member function(method); using dot (.) operator:  
+object_name.member;
+
+Note:  members are assigned value or called only with the object. Treating the class as a type, we first define an object and then assign etc.  
+
+### Private Versus Public Access
+Additional keywords are often used in the declaration of a class. Two of the most important
+are public and private.  
+The private and public keywords are used with members of a class—both data members
+and member methods. Private members can be accessed only within methods of the
+class itself. Public members can be accessed through any object of the class.  
+**All members of a class are private, by default.**  
+Consider the example:  
+
+    class Cat
+    {
+    unsigned int itsAge;
+    unsigned int itsWeight;
+    void Meow();
+    };
+If we create a program and try to write the following within main (for example):  
+
+
+    int main()
+    {
+    Cat Boots;
+    Boots.itsAge=5; // error! can’t access private data!
+    
+ In effect, by leaving these members as private, you’ve
+said to the compiler, “I’ll access itsAge, itsWeight, and Meow() only from within member
+functions of the Cat class.”
+ Just because Boots is an object of class Cat,
+that doesn’t mean that you can access the parts of Boots that are private (even though
+they are visible in the declaration).  
+Note: wondering,  "Why can’t Boots access his own age?” The
+answer is that Boots can, but you can’t. Boots, in his own methods, can access all his
+parts—public and private.  
+The way to use Cat so that you can access the data members is to make some of the
+members public:
+
+     class Cat
+     {
+     public:
+     unsigned int itsAge;
+     unsigned int itsWeight;
+     void Meow();
+     };
+     
+Note:  The keyword public applies to all members in the declaration
+until the keyword private is encountered—and vice versa.  
+
+### Making Member Data Private  
+To access private data in a class, you must create public functions known as accessor
+methods. Use these methods to set and get the private member variables. These accessor
+methods are the member functions that other parts of your program call to get and set
+your private member variables. A public accessor method is a class member function
+used either to read (get) the value of a private class member variable or to set its value.  
+Accessor functions enable you to separate the
+details of how the data is stored from how it is used. By using accessor functions, you
+can later change how the data is stored without having to rewrite any of the other functions
+in your programs that use the data.  
+
+### Implementing Class Methods:  
+An accessor function provides a public interface to the private member
+data of the class. Each accessor function, along with any other class methods that you
+declare, must have an implementation. The implementation is called the function
+definition.
+A member function definition begins similarly to the definition of a regular function.  
+Consider the example:  
+
+     // Demonstrates declaration of a class and
+     // definition of class methods
+     #include <iostream> // for cout
+
+      class Cat // begin declaration of the class
+      {
+      public: // begin public section
+      int GetAge(); // accessor function
+      void SetAge (int age); // accessor function
+      void Meow(); // general function
+      private: // begin private section
+      int itsAge; // member variable
+      };
+
+      // GetAge, Public accessor function
+      // returns value of itsAge member
+      int Cat::GetAge()
+      {
+      return itsAge;
+      }
+
+      // definition of SetAge, public
+      // accessor function
+      // sets itsAge member
+      void Cat::SetAge(int age)
+      {
+      // set member variable itsAge to
+     // value passed in by parameter age
+      itsAge = age;
+      }
+
+      // definition of Meow method
+      // returns: void
+      // parameters: None
+      // action: Prints “meow” to screen
+      void Cat::Meow()
+      {
+      std::cout << “Meow.\n”;
+      }
+
+     // create a cat, set its age, have it
+      // meow, tell us its age, then meow again.
+      int main()
+     {
+      Cat Frisky;
+      Frisky.SetAge(5);
+      Frisky.Meow();
+      std::cout << “Frisky is a cat who is “ ;
+      std::cout << Frisky.GetAge() << “ years old.\n”;
+      Frisky.Meow();
+      return 0;
+      }
+      
+
+      
+
