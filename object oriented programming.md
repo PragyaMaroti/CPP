@@ -213,5 +213,81 @@ Consider the example:
       }
       
 
-      
+Note on line 17 that class methods include the
+class name followed by two colons and the function name. This syntax tells the compiler
+that the GetAge() function you are defining here is the one that you declared in the Cat
+class. With the exception of this header line, the GetAge() function is created the same
+as any other function.  
 
+### Adding Constructors and Destructors:   
+We can initialize the member data of
+a class using a special member function called a constructor. The constructor can take
+parameters as needed, but it cannot have a return value—not even void. The constructor
+is a class method with the same name as the class itself.   
+Whenever we declare a constructor, we’ll also want to declare a destructor.  
+A destructor always has the name of the
+class, preceded by a tilde (~). Destructors take no arguments and have no return value. 
+
+Many types of constructors are available; some take arguments, others do not. The one
+that takes no arguments is called the default constructor. There is only one destructor.
+Like the default constructor, it takes no arguments.  
+It turns out that if you don’t create a constructor or a destructor, the compiler provides
+one for you. The constructor provided by the compiler is the default constructor. The
+default constructor and destructor created by the compiler don’t have arguments.   
+In part, it is a matter of form. All objects
+must be “constructed” and “destructed,” and these do-nothing functions are called as a
+part of the process of constructing and destructing.
+To declare an object without passing in parameters, such as:   
+Cat Rags; // Rags gets no parameters   
+you must have a constructor in the form   
+Cat();    
+**When you define an object of a class, the constructor is called.**
+**This is an exception to the rule that states all functions require parentheses, even if they
+take no parameters.**
+
+### Including const Member Functions
+You have used the const keyword to declare variables that would not change. You can
+also use the const keyword with member functions within a class. If you declare a class
+method const, you are promising that the method won’t change the value of any of the
+members of the class.  
+To declare a class method constant, put the keyword const after the parentheses enclosing
+any parameters but before the semicolon ending the method declaration. For example:  
+void SomeFunction() const;   
+This declares a constant member method called SomeFunction() that takes no arguments
+and returns void. You know this will not change any of the data members within the
+same class because it has been declared const.  
+**Accessor functions that only get values are often declared as constant functions by using
+the const modifier.**
+
+❕ Note: The declaration of
+the class is called its interface because it tells the user how to
+interact with the class. The interface is usually stored in an .hpp
+file, which is referred to as a header file.
+The function definition tells the compiler how the function works.
+The function definition is called the implementation of the class
+method, and it is kept in a .cpp file. The implementation details
+of the class are of concern only to the author of the class. Clients
+of the class—that is, the parts of the program that use the
+class—don’t need to know, and don’t care, how the functions are
+implemented. ❕  
+### Inline Implementation:  
+Just as you can ask the compiler to make a regular function inline, you can make class
+methods inline. The keyword inline appears before the return type. The inline implementation
+of the GetWeight() function, for example, looks like this:  
+inline int Cat::GetWeight()  
+{  
+return itsWeight; // return the Weight data member  
+}  
+**You can also put the definition of a function into the declaration of the class, which automatically
+makes that function inline.**
+### Classes with Other Classes as Member
+Data
+It is common to build up a complex class by declaring simpler classes and including
+them in the declaration of the more complicated class. For example, you might declare a
+wheel class, a motor class, a transmission class, and so forth, and then combine them
+into a car class. This declares a has-a relationship. A car has a motor, it has wheels, and it
+has a transmission.  
+### Exploring Structures
+A very close cousin to the keyword class is the keyword struct, which is used to
+declare a structure.**In C++**, a struct is the same as a class, except that its members are
+public by default and that it inherits publicly, by default.  
