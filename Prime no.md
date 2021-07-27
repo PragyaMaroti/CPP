@@ -54,11 +54,11 @@ N(N^1/2)t (approx= N(N^1/2))
 
 Found: **Sieve of Eratosthenes** method: most efficient algo for this.
 
-What's this method?
+- What's this method?  
 Start from the beginning, when a prime no. is found, mark  all its multiple in the range as they can't be prime. Don't check the marked ones as we proceed.
 Implementation:
-For first n no.s, we can have an array of that size and do the operation
-run the loop only till sqrt n becuz, if not sruck till then, can't be struck later.
+For first n no.s, we can have an array of that size and do the operation.  
+Run the loop only till sqrt(n) because, if not sruck till then, can't be struck later.
 ![image](https://user-images.githubusercontent.com/64036955/127141820-290d9d8c-1ff7-4e35-b5fe-9ee4cf576519.png)
 
 ```C
